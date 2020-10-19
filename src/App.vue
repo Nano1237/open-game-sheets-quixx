@@ -1,28 +1,40 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Row color="red"/>
+    <Row color="yellow"/>
+    <Row color="green"/>
+    <Row color="blue"/>
+    <WrongRow/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
+import Row from "@/components/Row";
+import WrongRow from "@/components/WrongRow";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    WrongRow,
+    Row
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto,  Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-size: 30px;
+  font-weight: bold;
+  font-style: normal;
+  line-height: 35px;
+}
+
+body{
+  margin: 0;
 }
 </style>
