@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="quixx">
     <Row color="red"/>
     <Row color="yellow"/>
     <Row color="green"/>
@@ -14,7 +14,7 @@ import Row from "@/components/Row";
 import WrongRow from "@/components/WrongRow";
 
 export default {
-  name: 'App',
+  name: 'Quixx',
   components: {
     WrongRow,
     Row
@@ -23,8 +23,8 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Roboto,  Avenir, Helvetica, Arial, sans-serif;
+#quixx {
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -34,7 +34,7 @@ export default {
   line-height: 35px;
 }
 
-body{
+body {
   margin: 0;
 }
 </style>
