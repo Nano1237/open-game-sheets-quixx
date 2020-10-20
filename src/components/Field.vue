@@ -1,5 +1,8 @@
 <template>
-  <span :class="'field-color-'+color" class="field">
+  <span
+      :class="colorClass"
+      class="field"
+      v-on:click="selectField(number)">
     <span>
 				<span>{{ number }}</span>
 			</span>
@@ -7,11 +10,51 @@
 </template>
 
 <script>
+import {Game} from "@/classes/Game";
+
 export default {
   name: 'Field',
+  created() {
+    this.colorClass['field-color-' + this.color] = true;
+    this.$root.$on('quixx.fieldSelected', () => {
+      if (!this.selected && !Game.isFieldSelectable(this.color, this.number)) {
+        this.selectable = false;
+        this.colorClass.active = Game.isFieldSelectable(this.color, this.number);
+      }
+      if (this.selected) {
+        this.colorClass.selected = true;
+      }
+    });
+    this.$root.$on('quixx.restart', () => {
+      this.selectable = true;
+      this.selected = false;
+      this.colorClass.active = true;
+      this.colorClass.selected = false;
+    });
+  },
+  data: function () {
+    return {
+      colorClass: {
+        active: true,
+        selected: false
+      },
+      selected: false,
+      selectable: true
+    };
+  },
   props: {
     number: Number,
     color: String,
+  },
+  methods: {
+    selectField: function (number) {
+      if (this.selected || !this.selectable) {
+        return;
+      }
+      Game.addField(this.color, number);
+      this.selected = true;
+      this.$root.$emit('quixx.fieldSelected');
+    }
   }
 }
 </script>
@@ -97,5 +140,25 @@ export default {
 .field-color-blue {
   color: #343760;
   background-color: #CCD4E9;
+}
+
+.selected {
+  background-color: black;
+}
+
+.field-color-red:not(.active) {
+  color: rgba(161, 68, 78, .15);
+}
+
+.field-color-yellow:not(.active) {
+  color: rgba(248, 199, 69, .15);
+}
+
+.field-color-green:not(.active) {
+  color: rgba(69, 137, 80, .15);
+}
+
+.field-color-blue:not(.active) {
+  color: rgba(52, 55, 96, .15);
 }
 </style>

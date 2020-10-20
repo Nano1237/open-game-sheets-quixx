@@ -5,6 +5,8 @@
     <Row color="green"/>
     <Row color="blue"/>
     <WrongRow/>
+    Punkte: {{ points }}
+    <button v-on:click="restart()">Restart</button>
   </div>
 </template>
 
@@ -12,9 +14,27 @@
 
 import Row from "@/components/Row";
 import WrongRow from "@/components/WrongRow";
+import {Game} from "@/classes/Game";
 
 export default {
   name: 'Quixx',
+  created() {
+    this.$root.$on('quixx.fieldSelected', () => {
+      this.points = Game.getPoints();
+    });
+  },
+  data() {
+    return {
+      points: 0
+    }
+  },
+  methods: {
+    restart() {
+      Game.restart();
+      this.$root.$emit('quixx.restart');
+      this.$root.$emit('quixx.fieldSelected');
+    }
+  },
   components: {
     WrongRow,
     Row
