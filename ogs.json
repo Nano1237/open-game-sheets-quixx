@@ -1,5 +1,6 @@
 {
   "name": "quixx",
   "description": "",
-  "icon": ""
+  "icon": "",
+  "main": "dist/quixx.umd.min.js"
 }
